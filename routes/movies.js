@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const moviesRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 
@@ -17,11 +18,12 @@ moviesRouter.post('/movies', celebrate({
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().pattern(/(https?:\/\/[www]?[a-z\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=0-9]*#?)/),
-  })
+  }),
 }), createMovie);
 
 moviesRouter.delete('/movies/:movieId', celebrate({
   params: Joi.object().keys({
+    // movieId: Joi.number().integer().required(),
     movieId: Joi.string().length(24).required().hex(),
   }),
 }), deleteMovie);

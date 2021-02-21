@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 const { errors, Joi, celebrate } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 require('dotenv').config();
@@ -34,7 +34,7 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-//app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
@@ -50,10 +50,10 @@ app.post('/signin', celebrate({
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    email: Joi.string().email(),
+    email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
-  })
-}), createUser)
+  }),
+}), createUser);
 
 app.use(auth);
 
@@ -62,7 +62,6 @@ app.use(routes);
 app.use(errorLogger);
 
 app.use(errors()); // обработчик ошибок celebrate
-
 
 app.use((err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500

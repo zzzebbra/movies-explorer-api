@@ -8,23 +8,23 @@ const regex = /(https?:\/\/[www]?[a-z\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: true
+    required: true,
   },
   director: {
     type: String,
-    required: true
+    required: true,
   },
   duration: {
     type: Number,
-    required: true
+    required: true,
   },
   year: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     type: String,
@@ -34,7 +34,7 @@ const movieSchema = new mongoose.Schema({
         return url.match(regex);
       },
       message: 'Ссылка может содержать цифры, латинские буквы и спецсимволы. Пожалуйста, проверьте ссылку.',
-    }
+    },
   },
   trailer: {
     type: String,
@@ -44,7 +44,7 @@ const movieSchema = new mongoose.Schema({
         return url.match(regex);
       },
       message: 'Ссылка может содержать цифры, латинские буквы и спецсимволы. Пожалуйста, проверьте ссылку.',
-    }
+    },
   },
   thumbnail: {
     type: String,
@@ -54,7 +54,7 @@ const movieSchema = new mongoose.Schema({
         return url.match(regex);
       },
       message: 'Ссылка может содержать цифры, латинские буквы и спецсимволы. Пожалуйста, проверьте ссылку.',
-    }
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -67,12 +67,12 @@ const movieSchema = new mongoose.Schema({
   },
   nameRU: {
     type: String,
-    required: true
+    required: true,
   },
   nameEN: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-module.exports = mongoose.model('movie', movieSchema)
+module.exports = mongoose.model('movie', movieSchema);
