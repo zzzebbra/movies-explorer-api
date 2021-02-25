@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-const { UnauthorizedError, NotFoundError, ConflictError } = require('../middlewares/errors');
+const { UnauthorizedError, ConflictError } = require('../middlewares/errors');
 
 module.exports.createUser = (req, res, next) => {
   const {
@@ -32,10 +32,17 @@ module.exports.createUser = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
+  let token;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-    // создадим токен
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      // создадим токен
+      if (process.env.NODE_ENV === 'production') {
+        token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      } else {
+        token = jwt.sign({ _id: user._id }, 'dev-secret', { expiresIn: '7d' });
+      }
+
+      // token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
 
       // вернём токен
       res.send({ token });
