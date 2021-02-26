@@ -31,13 +31,15 @@ const limiter = rateLimit({
 //   credentials: true,
 // };
 
-mongoose.connect('mongodb://localhost:27017/movies_explorer', {
+const {
+  PORT = 3000, DB_SERVER = 'localhost', DB_PORT = 27017, DB_NAME = 'movies_explorer',
+} = process.env;
+
+mongoose.connect(`mongodb://${DB_SERVER}:${DB_PORT}/${DB_NAME}`, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
-const { PORT = 3000 } = process.env;
 
 const app = express();
 
