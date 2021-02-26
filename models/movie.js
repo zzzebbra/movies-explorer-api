@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
+// const validator = require('validator');
 const user = require('./user');
 
 // eslint-disable-next-line no-useless-escape

@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 // const cors = require('cors');
 const { errors, Joi, celebrate } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -11,6 +13,11 @@ const routes = require('./routes/index.js');
 const { createUser, login } = require('./controllers/users');
 
 const auth = require('./middlewares/auth');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // за 15 минут
+  max: 100, // можно совершить максимум 100 запросов с одного IP
+});
 
 // const corsOptions = {
 //   origin: [
@@ -33,6 +40,10 @@ mongoose.connect('mongodb://localhost:27017/movies_explorer', {
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.use(limiter);
+
+app.use(helmet());
 
 // app.use(cors(corsOptions));
 
