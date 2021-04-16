@@ -20,11 +20,11 @@ moviesRouter.post('/movies', celebrate({
       }
       return helpers.message('Поле image заполненно некорректно');
     }),
-    trailer: Joi.string().required().custom((value, helpers) => {
+    trailerLink: Joi.string().required().custom((value, helpers) => {
       if (validator.isURL(value)) {
         return value;
       }
-      return helpers.message('Поле trailer заполненно некорректно');
+      return helpers.message('Поле trailerLink заполненно некорректно');
     }),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),

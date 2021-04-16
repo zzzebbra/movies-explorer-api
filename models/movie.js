@@ -36,7 +36,7 @@ const movieSchema = new mongoose.Schema({
       message: 'Ссылка может содержать цифры, латинские буквы и спецсимволы. Пожалуйста, проверьте ссылку.',
     },
   },
-  trailer: {
+  trailerLink: {
     type: String,
     required: true,
     validate: {
