@@ -21,7 +21,7 @@ const limiter = rateLimit({
 
 const corsOptions = {
   origin: [
-    'http://localhost:3000', 'http://localhost:3001', 'http://zzzebbra.students.nomoredomains.rocks', 'https://zzzebbra.students.nomoredomains.rocks',
+    'http://localhost:3000', 'http://localhost:3001', 'http://zzzebbra.students.nomoredomains.rocks',
 
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
