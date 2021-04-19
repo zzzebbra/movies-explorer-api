@@ -16,18 +16,18 @@ const auth = require('./middlewares/auth');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // за 15 минут
-  max: 1000, // можно совершить максимум 100 запросов с одного IP
+  max: 1000, // можно совершить максимум 1000 запросов с одного IP
 });
 
 const corsOptions = {
   origin: [
-    'http://localhost:3000', 'http://localhost:3001', 'http://zzzebbra.students.nomoredomains.rocks',
+    'http://localhost:3000', 'http://localhost:3001', 'http://zzzebbra.students.nomoredomains.rocks/', '*',
 
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: true,
+  preflightContinue: false,
   optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization', 'Origin'],
   credentials: true,
 };
 
