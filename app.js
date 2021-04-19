@@ -16,7 +16,7 @@ const auth = require('./middlewares/auth');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // за 15 минут
-  max: 1000, // можно совершить максимум 100 запросов с одного IP
+  max: 1000, // можно совершить максимум 1000 запросов с одного IP
 });
 
 const corsOptions = {
@@ -25,7 +25,7 @@ const corsOptions = {
 
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: true,
+  preflightContinue: false,
   optionsSuccessStatus: 204,
   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
   credentials: true,
